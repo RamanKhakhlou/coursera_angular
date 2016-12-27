@@ -2,7 +2,8 @@
   'use strict'
   angular.module('shopping', [])
     .service('ShoppingService', ShoppingService)
-    .controller('ShoppingController', ShoppingController)
+    .controller('ShoppingBuyController', ShoppingBuyController)
+    .controller('ShoppingBoughtController', ShoppingBoughtController)
 
   function ShoppingService() {
     var buyList = [
@@ -26,13 +27,20 @@
     }
   }
 
-  ShoppingController.$inject = ['$scope', 'ShoppingService']
-  function ShoppingController($scope, ShoppingService) {
-    $scope.buyItems = ShoppingService.getBuy()
-    $scope.boughtItems = ShoppingService.getBought()
+  ShoppingBuyController.$inject = ['ShoppingService']
+  function ShoppingBuyController(ShoppingService) {
+    var service = this
 
-    $scope.buy = function(index) {
+    service.items = ShoppingService.getBuy()
+
+    service.buy = function(index) {
       ShoppingService.buy(index)
     }
+  }
+
+  ShoppingBoughtController.$inject = ['ShoppingService']
+  function ShoppingBoughtController(ShoppingService) {
+    var service = this
+    service.items = ShoppingService.getBought()
   }
 })()

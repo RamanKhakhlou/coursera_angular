@@ -28,29 +28,29 @@
   <div class="container">
   <h1>Shopping List Check Off</h1>
 
-  <div class="row" ng-controller="ShoppingController">
+  <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6">
+    <div class="col-md-6" ng-controller="ShoppingBuyController as buyCtrl">
      <h2>To Buy:</h2>
      <ul>
-      <li ng-repeat="buyItem in buyItems">
+      <li ng-repeat="buyItem in buyCtrl.items">
         Buy {{buyItem.quantity}} {{buyItem.name}}
-        <button class="btn btn-default" ng-click="buy($index)">
+        <button class="btn btn-default" ng-click="buyCtrl.buy($index)">
           <span class="glyphicon glyphicon-ok"></span> Bought
         </button>
       </li>
      </ul>
-     <div class="emptyMessage" ng-show="!buyItems.length">Everything is bought!</div>
+     <div class="emptyMessage" ng-show="!buyCtrl.items.length">Everything is bought!</div>
     </div>
 
     <!-- Already Bought List -->
-    <div class="col-md-6">
+    <div class="col-md-6" ng-controller="ShoppingBoughtController as boughtCtrl">
      <h2>Already Bought:</h2>
      <ul>
-      <li ng-repeat="boughtItem in boughtItems">Bought {{boughtItem.quantity}} {{boughtItem.name}}</li>
+      <li ng-repeat="boughtItem in boughtCtrl.items">Bought {{boughtItem.quantity}} {{boughtItem.name}}</li>
      </ul>
-     <div class="emptyMessage" ng-show="!boughtItems.length">Nothing bought yet.</div>
+     <div class="emptyMessage" ng-show="!boughtCtrl.items.length">Nothing bought yet.</div>
     </div>
   </div>
 </div>
